@@ -89,7 +89,7 @@ resource "vault_approle_auth_backend_role" "entity-role" {
   for_each = toset(var.entities)
   role_name      = each.key
   role_id = each.key
-  token_policies = ["default", vault_policy.kv_rw_policy.name, vault_policy.postgres_creds_policy.name]
+  token_policies = ["default", vault_policy.kv_rw_policy.name]
 }
 
 resource "vault_approle_auth_backend_role_secret_id" "entity-role-secret-id" {
