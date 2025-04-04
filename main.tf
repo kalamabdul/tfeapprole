@@ -49,7 +49,7 @@ variable "postgres_ttl" {
 resource "vault_identity_entity" "entity" {
   for_each = toset(var.entities)
   name      = each.key
-  policies = [vault_policy.kv_rw_policy.name, vault_policy.postgres_creds_policy.name]
+  policies = [vault_policy.kv_rw_policy.name]
 
   metadata  = {
     ait = split("-", each.key)[0]
