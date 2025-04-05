@@ -6,8 +6,8 @@ variable "entities" {
     description = "A set of vault clients to create"
     # Keep nginx as the first vault client for docker-compose demo using AppRole. Please append additional apps to the list
     default = [
-        "12345-tfe",
-        "56789-tfe",
+        "tfe-12345",
+        "tfe-56789",
     ]
 }
 
