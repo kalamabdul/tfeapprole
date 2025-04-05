@@ -49,7 +49,7 @@ variable "postgres_ttl" {
 resource "vault_identity_entity" "entity" {
   for_each = toset(var.entities)
   name      = each.key
-  policies = [vault_policy.kv_rw_policy.name]
+  policies = ["kv_rw_policy"]
 
   metadata  = {
     ait = split("-", each.key)[0]
@@ -69,6 +69,6 @@ resource "vault_approle_auth_backend_role" "entity-role" {
   for_each = toset(var.entities)
   role_name      = each.key
   role_id = each.key
-  token_policies = ["default", vault_policy.kv_rw_policy.name]
+  token_policies = ["default", "kv_rw_policy"]
 }
 
