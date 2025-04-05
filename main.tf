@@ -88,10 +88,3 @@ resource "vault_approle_auth_backend_role" "entity-role" {
   token_policies = ["default", vault_policy.kv_rw_policy.name]
 }
 
-resource "vault_approle_auth_backend_role_secret_id" "entity-role-secret-id" {
-  backend        = vault_auth_backend.approle.path
-  for_each = toset(var.entities)
-  role_name      = each.key
-  depends_on = [vault_approle_auth_backend_role.entity-role]
-}
-
