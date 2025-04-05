@@ -68,7 +68,7 @@ resource "vault_identity_entity_alias" "test" {
 data "vault_policy_document" "kv_rw_policy" {
   rule {
     path         = "${var.kv_mount_path}/data/ait-73837/{{identity.entity.name}}/token"
-    capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+    capabilities = ["create", "read", "update", "delete", "list"]
     description  = "allow KV V2 Read Write on secrets"
   }
 }
