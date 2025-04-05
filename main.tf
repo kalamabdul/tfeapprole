@@ -1,5 +1,5 @@
-variable "token" {
-}
+# variable "token" {
+# }
 
 
 variable "entities" {
