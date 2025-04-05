@@ -79,13 +79,9 @@ resource "vault_policy" "kv_rw_policy" {
   policy = data.vault_policy_document.kv_rw_policy.hcl
 }
 
-resource "vault_auth_backend" "approle" {
-  type = "approle"
-  path = var.approle_mount_path
-}
 
 resource "vault_approle_auth_backend_role" "entity-role" {
-  backend        = vault_auth_backend.approle.path
+  backend        = "approle"
   for_each = toset(var.entities)
   role_name      = each.key
   role_id = each.key
