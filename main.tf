@@ -13,7 +13,7 @@ variable "entities" {
 
 locals {
   # Generate 10,000 sequential entities (format: NNNNN-tfe)
-  entities = [for i in range(1, 10001) : format("%05d-tfe", i)]
+  entities = [for i in range(1, 999) : format("%05d-tfe", i)]
 }
 
 
