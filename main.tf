@@ -66,6 +66,7 @@ resource "vault_identity_entity_alias" "test" {
 
 # Generate a random suffix (5 chars, uppercase alphanumeric)
 resource "random_string" "role_suffix" {
+for_each = toset(var.entities)
   length  = 5
   upper   = true
   numeric  = true
@@ -73,16 +74,12 @@ resource "random_string" "role_suffix" {
   special = false
 }
 
-# Combine "ZS" prefix with random suffix
-locals {
-  custom_role_id = "ZS${random_string.role_suffix.result}" # e.g., "ZSP2B7R"
-}
 
 resource "vault_approle_auth_backend_role" "entity-role" {
   backend        = "approle"
   for_each = toset(var.entities)
   role_name      = each.key
-  role_id = local.custom_role_id
+  role_id = "ZS${random_string.role_suffix[each.key].result}"
   token_policies = ["default", "kv_rw_policy"]
 }
 
