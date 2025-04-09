@@ -11,6 +11,12 @@ variable "entities" {
     ]
 }
 
+locals {
+  # Generate 10,000 sequential entities (format: NNNNN-tfe)
+  entities = [for i in range(1, 10001) : format("%05d-tfe", i)]
+}
+
+
 variable "kv_version" {
     description = "The version for the KV secrets engine. Valid values are kv-v2 or kv"
     default = "kv-v2"
@@ -47,7 +53,7 @@ variable "postgres_ttl" {
 }
 # Create the vault entities
 resource "vault_identity_entity" "entity" {
-  for_each = toset(var.entities)
+  for_each = toset(local.entities)
   name      = each.key
   policies = ["kv_rw_policy"]
 
@@ -58,7 +64,7 @@ resource "vault_identity_entity" "entity" {
 
 # Create an approle alias
 resource "vault_identity_entity_alias" "test" {
-  for_each = toset(var.entities)
+  for_each = toset(local.entities)
   name            = vault_approle_auth_backend_role.entity-role[each.key].role_id
   mount_accessor  = "auth_approle_3e2cac09"
   canonical_id    = vault_identity_entity.entity[each.key].id
@@ -66,7 +72,7 @@ resource "vault_identity_entity_alias" "test" {
 
 # Generate a random suffix (5 chars, uppercase alphanumeric)
 resource "random_string" "role_suffix" {
-for_each = toset(var.entities)
+for_each = toset(local.entities)
   length  = 5
   upper   = true
   numeric  = true
@@ -77,7 +83,7 @@ for_each = toset(var.entities)
 
 resource "vault_approle_auth_backend_role" "entity-role" {
   backend        = "approle"
-  for_each = toset(var.entities)
+  for_each = toset(local.entities)
   role_name      = each.key
   role_id = "ZS${random_string.role_suffix[each.key].result}"
   token_policies = ["default", "kv_rw_policy"]
