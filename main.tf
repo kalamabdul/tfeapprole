@@ -20,7 +20,7 @@ locals {
   # Generate 10 chunks of 1000
   entities = flatten([
     for chunk in range(0, 2) : [
-      for i in range(1, 1001) : format("%05d-tfe", i + (chunk * 1000))
+      for i in range(1, 2) : format("%05d-tfe", i + (chunk * 1))
     ]
   ])
 }
