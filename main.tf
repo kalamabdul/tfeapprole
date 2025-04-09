@@ -68,7 +68,7 @@ resource "vault_identity_entity_alias" "test" {
 resource "random_string" "role_suffix" {
   length  = 5
   upper   = true
-  number  = true
+  numeric  = true
   lower   = false
   special = false
 }
