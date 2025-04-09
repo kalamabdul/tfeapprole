@@ -11,9 +11,18 @@ variable "entities" {
     ]
 }
 
+# locals {
+#   # Generate 10,000 sequential entities (format: NNNNN-tfe)
+#   entities = [for i in range(1, 999) : format("%05d-tfe", i)]
+# }
+
 locals {
-  # Generate 10,000 sequential entities (format: NNNNN-tfe)
-  entities = [for i in range(1, 999) : format("%05d-tfe", i)]
+  # Generate 10 chunks of 1000
+  entities = flatten([
+    for chunk in range(0, 2) : [
+      for i in range(1, 1001) : format("%05d-tfe", i + (chunk * 1000))
+    ]
+  ])
 }
 
 
