@@ -5073,7 +5073,7 @@ resource "vault_identity_entity" "entity" {
 resource "vault_identity_entity_alias" "test" {
   for_each = toset(var.entities)
   name            = vault_approle_auth_backend_role.entity-role[each.key].role_id
-  mount_accessor  = "auth_approle_3e2cac09"
+  mount_accessor  = "auth_approle_2d330717"
   canonical_id    = vault_identity_entity.entity[each.key].id
 }
 
