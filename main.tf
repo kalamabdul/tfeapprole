@@ -1948,6 +1948,7 @@ variable "entities" {
 "bit153172world",
 "bit0542world",
 "bit21234world",
+/*
 "bit6533372world",
 "bit25820034world",
 "bit99633world",
@@ -5006,6 +5007,7 @@ variable "entities" {
 "bit76world",
 "bit035225875world",
 "bit4world"
+*/
     ]
 }
 
