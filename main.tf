@@ -759,7 +759,6 @@ variable "entities" {
 "bit872936567world",
 "bit302496world",
 "bit562world",
-/*
 "bit8392world",
 "bit99786033world",
 "bit70world",
@@ -1742,6 +1741,7 @@ variable "entities" {
 "bit07032384world",
 "bit3696world",
 "bit3905world",
+/*
 "bit409045world",
 "bit2719world",
 "bit97037575world",
