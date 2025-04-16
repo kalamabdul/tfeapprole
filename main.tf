@@ -1,16 +1,11 @@
-# variable "token" {
-# }
-
-
-locals {
-  # Generate 10 chunks of 1000
-  entities = flatten([
-    for chunk in range(0, 3) : [
-      for i in range(1, 1002) : format("%05d-tfe", i + (chunk * 1001))
-    ]
-  ])
-}
-
+variable "entities" {
+     description = "A set of vault clients to create"
+     # Keep nginx as the first vault client for docker-compose demo using AppRole. Please append additional apps to the list
+     default = [
+         "12345-tfe",
+         "56789-tfe",
+     ]
+ }
 
 variable "kv_version" {
     description = "The version for the KV secrets engine. Valid values are kv-v2 or kv"
